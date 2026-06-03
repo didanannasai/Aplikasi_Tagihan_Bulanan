@@ -1,4 +1,0 @@
-package Functions
-
-import "fmt"
-
