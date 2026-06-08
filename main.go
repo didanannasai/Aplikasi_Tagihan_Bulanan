@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 type Tagihan struct {
-	nama_tagihan string
+	nama_tagihan         string
 	nominal, jatuh_tempo int
 }
 
@@ -30,29 +30,26 @@ func main() {
 			fmt.Print("Tanggal jatuh tempo: ")
 			fmt.Scanln(&data[jumlah_tagihan].jatuh_tempo)
 			jumlah_tagihan++
-		}else if no == 2 {
+		} else if no == 2 {
 			fmt.Print("Masukkan urutan Tagihan yang ingin diubah: ")
 			fmt.Scanln(&urutan)
 			fmt.Print("Nama tagihan: ")
-			fmt.Scanln(&data[urutan - 1].nama_tagihan)
+			fmt.Scanln(&data[urutan-1].nama_tagihan)
 			fmt.Print("Nominal tagihan: ")
-			fmt.Scanln(&data[urutan - 1].nominal)
+			fmt.Scanln(&data[urutan-1].nominal)
 			fmt.Print("Tanggal jatuh tempo: ")
-			fmt.Scanln(&data[urutan - 1].jatuh_tempo)
-		}else if no == 3 {
-			var temp [1000]Tagihan
-			fmt.Println("Masukkan urutan Tagihan yang ingin didelete: ")
-			fmt.Scanln(&urutan)
-			urutan 
-		}else if no == 4 {
+			fmt.Scanln(&data[urutan-1].jatuh_tempo)
+		} else if no == 3 {
+
+		} else if no == 4 {
 			for i := 0; i < jumlah_tagihan; i++ {
 				fmt.Printf("%d. Tagihan     : %s\n", i+1, data[i].nama_tagihan)
 				fmt.Println("   Nominal     : Rp", data[i].nominal)
 				fmt.Println("   Jatuh Tempo :", data[i].jatuh_tempo)
 			}
-		}else if no == 5 {
+		} else if no == 5 {
 			status = false
-		}else {
+		} else {
 			fmt.Println("MASUKKAN NOMOR SESUAI KETENTUAN")
 		}
 		fmt.Println()
