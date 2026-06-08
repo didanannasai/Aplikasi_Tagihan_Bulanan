@@ -1,5 +1,5 @@
 package functions
 
-func Penjumlahan(a, b int) int {
+func Penjumlahan(a int) int {
 	return a + b
 }
