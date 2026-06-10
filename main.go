@@ -135,7 +135,7 @@ func main() {
 			fmt.Printf("Presentase tagihan yang lunas    : %.1f%%\n", float64(status_lunas)/float64(jumlah_tagihan) * 100.0)
 		}else if no == 8 {
 			status = false
-		}else {
+		} else {
 			fmt.Println("MASUKKAN NOMOR SESUAI KETENTUAN")
 		}
 		fmt.Println()
