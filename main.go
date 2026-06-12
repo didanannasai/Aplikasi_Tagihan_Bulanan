@@ -14,13 +14,14 @@ func main() {
 	var no, jumlah_tagihan, urutan, total int
 	var data = make([]Tagihan, 100)
 	var kategori []string
-	fmt.Println("            ===== PROGRAM TAGIHAN (SIMTAB) =====\n")
+	fmt.Println("               ===== PROGRAM TAGIHAN (SIMTAB) =====\n")
 	fmt.Println(">>> INFORMASI PENGGUNAAN APLIKASI <<<")
 	fmt.Println("Ketik Angka:")
-	fmt.Println("1. untuk menambahkan data        5. untuk menampilkan tagihan")
-	fmt.Println("2. untuk mengubah data           6. untuk mengurutkan jatuh tempo terdekat")
-	fmt.Println("3. untuk delete data             7. untuk menampilkan statistik")
-	fmt.Println("4. untuk mencari nama tagihan    8. untuk menghentikan program\n")
+	fmt.Println("1. untuk menambahkan data        6. untuk mengurutkan jatuh tempo terdekat")
+	fmt.Println("2. untuk mengubah data           7. untuk menampilkan statistik")
+	fmt.Println("3. untuk delete data             8. untuk menampilkan tagihan berdasarkan kategori")
+	fmt.Println("4. untuk mencari nama tagihan    9. untuk menghentikan program")
+	fmt.Println("5. untuk menampilkan tagihan\n")
 
 	for status {
 		fmt.Print("Ketik : ")
@@ -76,8 +77,15 @@ func main() {
 				fmt.Print("Tanggal jatuh tempo : ")
 				fmt.Scanln(&data[urutan - 1].jatuh_tempo)
 			}else if n == "Status" {
-				fmt.Print("Status pembayaran : ")
-				fmt.Scanln(&data[urutan - 1].status_pelunasan)
+				if data[urutan - 1].status_pelunasan == "Lunas" {
+					fmt.Println("Tidak bisa merubah status lagi")
+				}else if data[urutan - 1].status_pelunasan == "Belum Lunas" {
+					fmt.Print("Status pembayaran : ")
+					fmt.Scanln(&data[urutan - 1].status_pelunasan)
+					if data[urutan - 1].status_pelunasan == "Lunas" {
+						total -= data[urutan - 1].nominal
+					}
+				}
 			}
 		}else if no == 3 {
 
@@ -127,14 +135,33 @@ func main() {
 			for i := 0; i < jumlah_tagihan; i++ {
 				if data[i].status_pelunasan == "Lunas"{
 					status_lunas++
-					fmt.Println(data[i].nominal)
-					total -= data[i].nominal
 				}
 			}
 			fmt.Printf("Total tagihan yang harus dibayar : Rp%d\n", total)
 			fmt.Printf("Presentase tagihan yang lunas    : %.1f%%\n", float64(status_lunas)/float64(jumlah_tagihan) * 100.0)
 		}else if no == 8 {
+			var nomor int = 1
+			for i := 0; i < len(kategori); i++ {
+				fmt.Println("======================================")
+				fmt.Printf("Kategori %s:\n", kategori[i])
+				fmt.Println("--------------------------------------")
+				for j := 0; j < len(data); j++ {
+					if data[j].kategori == kategori[i] {
+						fmt.Printf("%d. Tagihan          : %s\n", nomor, data[j].nama_tagihan)
+						fmt.Printf("   Nominal          : Rp%d\n", data[j].nominal)
+						fmt.Printf("   Jatuh Tempo      : %d\n", data[j].jatuh_tempo)
+						fmt.Printf("   Status Pelunasan : %s\n", data[j].status_pelunasan)
+						fmt.Println("--------------------------------------")
+						nomor++
+					}
+				}
+				nomor = 1
+			}
+			fmt.Println("======================================")
+			fmt.Println()
+		}else if no == 9 {
 			status = false
+			fmt.Println("JANGAN LUPA BAYAR HUTANG :)")
 		} else {
 			fmt.Println("MASUKKAN NOMOR SESUAI KETENTUAN")
 		}
