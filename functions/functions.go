@@ -5,6 +5,43 @@ import (
 	"code/model"
 )
 
+func TambahData(kategori *[]string, data []model.Tagihan, jumlah_tagihan, total *int) {
+	var setuju string
+	if len(*kategori) > 0 {
+		fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+		fmt.Println("| Daftar Kategori-Kategori: |")
+		fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+		for i := 0; i < len(*kategori); i++ {
+			fmt.Printf("  %d. %s\n", i + 1, (*kategori)[i])
+			fmt.Println("+---------------------------+")
+		}
+		fmt.Println()
+		fmt.Println("Tambah Kategori? (Y/n)")
+		fmt.Scanln(&setuju)
+		if setuju == "Y" {
+			fmt.Print("Masukkan nama Kategori : ")
+			fmt.Scanln(&data[*jumlah_tagihan].Kategori)
+			*kategori = append(*kategori, data[*jumlah_tagihan].Kategori)
+		}else if setuju == "n" {
+			fmt.Print("Masukkan salah satu nama Kategori di atas: ")
+			fmt.Scanln(&data[*jumlah_tagihan].Kategori)
+		}
+	}else {
+		fmt.Print("Masukkan nama Kategori : ")
+		fmt.Scanln(&data[*jumlah_tagihan].Kategori)
+		*kategori = append(*kategori, data[*jumlah_tagihan].Kategori)
+	}
+	fmt.Print("Nama tagihan           : ")
+	fmt.Scanln(&data[*jumlah_tagihan].Nama_tagihan)
+	fmt.Print("Nominal tagihan        : ")
+	fmt.Scanln(&data[*jumlah_tagihan].Nominal)
+	*total += data[*jumlah_tagihan].Nominal
+	fmt.Print("Tanggal jatuh tempo    : ")
+	fmt.Scanln(&data[*jumlah_tagihan].Jatuh_tempo)
+	data[*jumlah_tagihan].Status_pelunasan = "Belum Lunas"
+	*jumlah_tagihan++
+}
+
 func UbahData(data []model.Tagihan, jumlah_tagihan int, total *int) {
 	var n, cariNama string
 	var found bool = false

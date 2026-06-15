@@ -24,37 +24,7 @@ func main() {
 		fmt.Print("Ketik : ")
 		fmt.Scanln(&no)
 		if no == 1 {
-			var setuju string
-			if len(kategori) > 0 {
-				fmt.Println("Daftar Kategori-Kategori: ")
-				for i := 0; i < len(kategori); i++ {
-					fmt.Printf("%d. %s\n", i + 1, kategori[i])
-				}
-				fmt.Println()
-				fmt.Println("Tambah Kategori? (Y/n)")
-				fmt.Scanln(&setuju)
-				if setuju == "Y" {
-					fmt.Print("Masukkan nama Kategori : ")
-					fmt.Scanln(&data[jumlah_tagihan].Kategori)
-					kategori = append(kategori, data[jumlah_tagihan].Kategori)
-				}else if setuju == "n" {
-					fmt.Print("Masukkan salah satu nama Kategori di atas: ")
-					fmt.Scanln(&data[jumlah_tagihan].Kategori)
-				}
-			}else {
-				fmt.Print("Masukkan nama Kategori : ")
-				fmt.Scanln(&data[jumlah_tagihan].Kategori)
-				kategori = append(kategori, data[jumlah_tagihan].Kategori)
-			}
-			fmt.Print("Nama tagihan        : ")
-			fmt.Scanln(&data[jumlah_tagihan].Nama_tagihan)
-			fmt.Print("Nominal tagihan     : ")
-			fmt.Scanln(&data[jumlah_tagihan].Nominal)
-			total += data[jumlah_tagihan].Nominal
-			fmt.Print("Tanggal jatuh tempo : ")
-			fmt.Scanln(&data[jumlah_tagihan].Jatuh_tempo)
-			data[jumlah_tagihan].Status_pelunasan = "Belum Lunas"
-			jumlah_tagihan++
+			functions.TambahData(&kategori, data, &jumlah_tagihan, &total)
 		}else if no == 2 {
 			functions.UbahData(data, jumlah_tagihan, &total)
 		}else if no == 3 {
