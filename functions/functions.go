@@ -5,6 +5,46 @@ import (
 	"code/model"
 )
 
+func Sorting(data []model.Tagihan, jumlah_tagihan int) {
+	var metode int
+	fmt.Println("Pilih metode pengurutan:")
+	fmt.Println("1. Selection Sort")
+	fmt.Println("2. Insertion Sort")
+	fmt.Print("Ketik: ")
+	fmt.Scanln(&metode)
+	if metode == 1 {
+		for i := 0; i < jumlah_tagihan; i++ {
+    	 	min := i
+    		for j := i + 1; j < jumlah_tagihan; j++ {
+       			if data[j].Jatuh_tempo < data[min].Jatuh_tempo {
+            		min = j
+        		}
+       		}
+        	data[i], data[min] = data[min], data[i]
+		}
+    } else if metode == 2 {
+	    for i := 1; i < jumlah_tagihan; i++ {
+			min := data[i]
+			j := i - 1
+			for j >= 0 && data[j].Jatuh_tempo > min.Jatuh_tempo {
+				data[j+1] = data[j]
+				j--
+			}
+		    data[j+1] = min
+		}
+		} else {
+			fmt.Println("MASUKKAN NOMOR SESUAI KETENTUAN")
+		}
+
+		for i := 0; i < jumlah_tagihan; i++ {
+
+		fmt.Printf("%d. Tagihan     : %s\n", i+1, data[i].Nama_tagihan)
+		fmt.Println("   Nominal     : Rp", data[i].Nominal)
+		fmt.Println("   Jatuh Tempo :", data[i].Jatuh_tempo)
+		
+		}
+}
+
 func Menampilkan(data []model.Tagihan, kategori []string) {
 	var nomor int = 1
 	for i := 0; i < len(kategori); i++ {

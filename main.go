@@ -41,22 +41,7 @@ func main() {
 		}else if no == 5 {
 			functions.Menampilkan(data, kategori)
 		}else if no == 6 {
-			for i := 0; i < jumlah_tagihan; i++ {
-       			min := i
-       			for j := i + 1; j < jumlah_tagihan; j++ {
-           			if data[j].Jatuh_tempo < data[min].Jatuh_tempo {
-                		min = j
-            		}
-       			}
-        		data[i], data[min] = data[min], data[i]
-    		}
-		for i := 0; i < jumlah_tagihan; i++ {
-		
-			fmt.Printf("%d. Tagihan     : %s\n", i+1, data[i].Nama_tagihan)
-			fmt.Println("   Nominal     : Rp", data[i].Nominal)
-			fmt.Println("   Jatuh Tempo :", data[i].Jatuh_tempo)
-		
-		}
+			functions.Sorting(data, jumlah_tagihan)
 		}else if no == 7 {
 			var status_lunas int
 			for i := 0; i < jumlah_tagihan; i++ {
