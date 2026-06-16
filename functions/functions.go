@@ -5,6 +5,31 @@ import (
 	"code/model"
 )
 
+func HapusData(data []model.Tagihan, jumlah_tagihan, total *int) {
+	var nama string
+	var x int = -1
+	fmt.Print("Nama tagihan yang ingin dihapus: ")
+	fmt.Scanln(&nama)
+	for i := 0; i < *jumlah_tagihan; i++ {
+		if data[i].Nama_tagihan == nama {
+			x = i
+
+			*total -= data[i].Nominal
+
+			break
+		}
+	}
+	if x == -1 {
+		fmt.Println("Data tidak ditemukan")
+	}else {
+		for i := x; i < *jumlah_tagihan-1; i++ {
+			data[i] = data[i+1]
+		}
+		data[*jumlah_tagihan-1] = model.Tagihan{}
+		*jumlah_tagihan--
+	}
+}
+
 func Statistik(data []model.Tagihan, jumlah_tagihan, total int) {
 	var status_lunas int
 		for i := 0; i < jumlah_tagihan; i++ {

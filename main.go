@@ -27,7 +27,7 @@ func main() {
 		}else if no == 2 {
 			functions.UbahData(data, jumlah_tagihan, &total)
 		}else if no == 3 {
-
+			functions.HapusData(data, &jumlah_tagihan, &total)
 		}else if no == 4 {
 			var tipe string
 			fmt.Println("Mencari berdasarkan? (Nama tagihan / Kategori)")
@@ -45,7 +45,7 @@ func main() {
 			functions.Statistik(data, jumlah_tagihan, total)
 		}else if no == 8 {
 			status = false
-			fmt.Println("JANGAN LUPA BAYAR HUTANG :)")
+			fmt.Println("TERIMA KASIH :)")
 		} else {
 			fmt.Println("MASUKKAN NOMOR SESUAI KETENTUAN")
 		}
