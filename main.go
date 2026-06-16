@@ -39,25 +39,7 @@ func main() {
 				functions.SearchKategori(data, kategori, jumlah_tagihan)
 			}
 		}else if no == 5 {
-			var nomor int = 1
-			for i := 0; i < len(kategori); i++ {
-				fmt.Println("======================================")
-				fmt.Printf("kategori %s:\n", kategori[i])
-				fmt.Println("--------------------------------------")
-				for j := 0; j < len(data); j++ {
-					if data[j].Kategori == kategori[i] {
-						fmt.Printf("%d. Tagihan          : %s\n", nomor, data[j].Nama_tagihan)
-						fmt.Printf("   Nominal          : Rp%d\n", data[j].Nominal)
-						fmt.Printf("   Jatuh Tempo      : %d\n", data[j].Jatuh_tempo)
-						fmt.Printf("   Status Pelunasan : %s\n", data[j].Status_pelunasan)
-						fmt.Println("--------------------------------------")
-						nomor++
-					}
-				}
-				nomor = 1
-			}
-			fmt.Println("======================================")
-			fmt.Println()
+			functions.Menampilkan(data, kategori)
 		}else if no == 6 {
 			for i := 0; i < jumlah_tagihan; i++ {
        			min := i
