@@ -5,6 +5,142 @@ import (
 	"code/model"
 )
 
+func SearchNamaTagihan(data []model.Tagihan, jumlah_tagihan int) {
+	var nama, metode string
+	fmt.Print("Masukkan nama tagihan : ")
+	fmt.Scanln(&nama)
+	fmt.Println("Masukkan metode pencarian! (Sequential/Binary)")
+	fmt.Scanln(&metode)
+	if metode == "Sequential" {
+		var found bool = false
+		var x int = 0
+		for x < jumlah_tagihan && !found {
+			found = data[x].Nama_tagihan == nama
+			x++
+		}
+		if found == true {
+			fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+			fmt.Printf("   Tagihan          : %s\n", data[x-1].Nama_tagihan)
+			fmt.Printf("   Nominal          : Rp%d\n", data[x-1].Nominal)
+			fmt.Println("   Jatuh Tempo      :", data[x-1].Jatuh_tempo)
+			fmt.Println("   Status Pelunasan :", data[x-1].Status_pelunasan)
+			fmt.Println("   Kategori         :", data[x-1].Kategori)
+			fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+		}else if found == false {
+			fmt.Println("Nama tagihan BELUM terdata")
+		}
+		}else if metode == "Binary" {
+			for i := 0; i < jumlah_tagihan; i++ {
+       			min := i
+       			for j := i + 1; j < jumlah_tagihan; j++ {
+        			if data[j].Nama_tagihan < data[min].Nama_tagihan {
+        				min = j
+         			}
+       			}
+        		data[i], data[min] = data[min], data[i]
+    		}
+		kr := 0
+		kn := jumlah_tagihan - 1
+		found := false
+		var x int
+		for kr <= kn && !found {
+			med := (kr + kn) / 2
+			if data[med].Nama_tagihan < nama {
+				kr = med + 1
+			}else if data[med].Nama_tagihan > nama {
+				kn = med - 1
+			}else {
+				found = true
+				x = med
+			}
+		}
+		if found == true {
+			fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+			fmt.Printf("   Tagihan          : %s\n", data[x].Nama_tagihan)
+			fmt.Printf("   Nominal          : Rp%d\n", data[x].Nominal)
+			fmt.Println("   Jatuh Tempo      :", data[x].Jatuh_tempo)
+			fmt.Println("   Status Pelunasan :", data[x].Status_pelunasan)
+			fmt.Println("   Kategori         :", data[x].Kategori)
+			fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+		}else if found == false {
+			fmt.Println("Nama tagihan BELUM terdata")
+		}
+	}
+}
+
+func SearchKategori(data []model.Tagihan, kategori []string, jumlah_tagihan int) {
+	var nama, metode string
+	fmt.Print("Masukkan nama kategori : ")
+	fmt.Scanln(&nama)
+	fmt.Println("Masukkan metode pencarian! (Sequential/Binary)")
+	fmt.Scanln(&metode)
+	if metode == "Sequential" {
+		var found bool = false
+		var x int
+		for x < jumlah_tagihan && !found {
+			found = kategori[x] == nama
+			x++
+		}
+		x = 0
+		if found == true {
+			fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+			for i := 0; i < jumlah_tagihan; i++ {
+				if data[i].Kategori == nama {
+					fmt.Printf("   Tagihan          : %s\n", data[i].Nama_tagihan)
+					fmt.Printf("   Nominal          : Rp%d\n", data[i].Nominal)
+					fmt.Println("   Jatuh Tempo      :", data[i].Jatuh_tempo)
+					fmt.Println("   Status Pelunasan :", data[i].Status_pelunasan)
+					fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+				}
+			}
+		}else if found == false {
+			fmt.Println("Nama tagihan BELUM terdata")
+		}
+		found = false
+	}else if metode == "Binary" {
+		for i := 0; i < len(kategori)-1; i++ {
+     		min := i
+      		for j := i + 1; j < len(kategori); j++ {
+       			if kategori[j] < kategori[min] {
+        	    	min = j
+         		}
+       		}
+    		kategori[i], kategori[min] = kategori[min], kategori[i]
+    	}
+
+    	kr := 0
+    	kn := len(kategori) - 1
+    	found := false
+    	for kr <= kn && !found {
+        	med := (kr + kn) / 2
+
+        	if kategori[med] < nama {
+        		kr = med + 1
+    	    } else if kategori[med] > nama {
+    	        kn = med - 1
+    	    } else {
+     	       found = true
+     	   	}
+   		}
+
+    	if found == true{
+			fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    	    for i := 0; i < jumlah_tagihan; i++ {
+        		if data[i].Kategori == nama {
+        		    fmt.Printf("   Tagihan          : %s\n", data[i].Nama_tagihan)
+        		    fmt.Printf("   Nominal          : Rp%d\n", data[i].Nominal)
+        		    fmt.Println("   Jatuh Tempo      :", data[i].Jatuh_tempo)
+        			fmt.Println("   Status Pelunasan :", data[i].Status_pelunasan)
+        		    fmt.Println("   Kategori         :", data[i].Kategori)
+        		    fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        		}
+        	}
+    	} else {
+    	    fmt.Println("Kategori BELUM terdata")
+		}
+	}
+}
+
 func TambahData(kategori *[]string, data []model.Tagihan, jumlah_tagihan, total *int) {
 	var setuju string
 	if len(*kategori) > 0 {
@@ -13,7 +149,7 @@ func TambahData(kategori *[]string, data []model.Tagihan, jumlah_tagihan, total 
 		fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 		for i := 0; i < len(*kategori); i++ {
 			fmt.Printf("  %d. %s\n", i + 1, (*kategori)[i])
-			fmt.Println("+---------------------------+")
+			fmt.Println("-----------------------------")
 		}
 		fmt.Println()
 		fmt.Println("Tambah Kategori? (Y/n)")
