@@ -5,6 +5,19 @@ import (
 	"code/model"
 )
 
+func Statistik(data []model.Tagihan, jumlah_tagihan, total int) {
+	var status_lunas int
+		for i := 0; i < jumlah_tagihan; i++ {
+			if data[i].Status_pelunasan == "Lunas"{
+				status_lunas++
+			}
+		}
+		fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+		fmt.Printf("Total tagihan yang harus dibayar : Rp%d\n", total)
+		fmt.Printf("Presentase tagihan yang lunas    : %.1f%%\n", float64(status_lunas)/float64(jumlah_tagihan) * 100.0)
+		fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+}
+
 func Sorting(data []model.Tagihan, jumlah_tagihan int) {
 	var metode int
 	fmt.Println("Pilih metode pengurutan:")
@@ -64,7 +77,6 @@ func Menampilkan(data []model.Tagihan, kategori []string) {
 		nomor = 1
 	}
 	fmt.Println("======================================")
-	fmt.Println()
 }
 
 func SearchNamaTagihan(data []model.Tagihan, jumlah_tagihan int) {

@@ -14,11 +14,10 @@ func main() {
 	fmt.Println("               ===== PROGRAM TAGIHAN (SIMTAB) =====\n")
 	fmt.Println(">>> INFORMASI PENGGUNAAN APLIKASI <<<")
 	fmt.Println("Ketik Angka:")
-	fmt.Println("1. untuk menambahkan data        6. untuk mengurutkan jatuh tempo terdekat")
-	fmt.Println("2. untuk mengubah data           7. untuk menampilkan statistik")
-	fmt.Println("3. untuk delete data             8. untuk menampilkan tagihan berdasarkan Kategori")
-	fmt.Println("4. untuk mencari nama tagihan    9. untuk menghentikan program")
-	fmt.Println("5. untuk menampilkan tagihan\n")
+	fmt.Println("1. untuk menambahkan data        5. untuk menampilkan tagihan")
+	fmt.Println("2. untuk mengubah data           6. untuk mengurutkan jatuh tempo terdekat")
+	fmt.Println("3. untuk delete data             7. untuk menampilkan statistik")
+	fmt.Println("4. untuk mencari nama tagihan    8. untuk menghentikan program\n")
 
 	for status {
 		fmt.Print("Ketik : ")
@@ -43,16 +42,8 @@ func main() {
 		}else if no == 6 {
 			functions.Sorting(data, jumlah_tagihan)
 		}else if no == 7 {
-			var status_lunas int
-			for i := 0; i < jumlah_tagihan; i++ {
-				if data[i].Status_pelunasan == "Lunas"{
-					status_lunas++
-				}
-			}
-			fmt.Printf("Total tagihan yang harus dibayar : Rp%d\n", total)
-			fmt.Printf("Presentase tagihan yang lunas    : %.1f%%\n", float64(status_lunas)/float64(jumlah_tagihan) * 100.0)
+			functions.Statistik(data, jumlah_tagihan, total)
 		}else if no == 8 {
-		}else if no == 9 {
 			status = false
 			fmt.Println("JANGAN LUPA BAYAR HUTANG :)")
 		} else {
