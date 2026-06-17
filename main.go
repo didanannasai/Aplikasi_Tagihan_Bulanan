@@ -11,13 +11,15 @@ func main() {
 	var no, jumlah_tagihan, total int
 	var data = make([]model.Tagihan, 100)
 	var kategori []string
-	fmt.Println("               ===== PROGRAM TAGIHAN (SIMTAB) =====\n")
+	fmt.Println("\n                     PROGRAM TAGIHAN (SIMTAB) \n")
 	fmt.Println(">>> INFORMASI PENGGUNAAN APLIKASI <<<")
+	fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 	fmt.Println("Ketik Angka:")
 	fmt.Println("1. untuk menambahkan data        5. untuk menampilkan tagihan")
 	fmt.Println("2. untuk mengubah data           6. untuk mengurutkan jatuh tempo terdekat")
 	fmt.Println("3. untuk delete data             7. untuk menampilkan statistik")
-	fmt.Println("4. untuk mencari nama tagihan    8. untuk menghentikan program\n")
+	fmt.Println("4. untuk mencari nama tagihan    8. untuk menghentikan program")
+	fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
 	for status {
 		fmt.Print("Ketik : ")

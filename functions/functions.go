@@ -176,7 +176,7 @@ func SearchKategori(data []model.Tagihan, kategori []string, jumlah_tagihan int)
 	if metode == "Sequential" {
 		var found bool = false
 		var x int
-		for x < jumlah_tagihan && !found {
+		for x < len(kategori) && !found {
 			found = kategori[x] == nama
 			x++
 		}
@@ -193,7 +193,7 @@ func SearchKategori(data []model.Tagihan, kategori []string, jumlah_tagihan int)
 				}
 			}
 		}else if found == false {
-			fmt.Println("Nama tagihan BELUM terdata")
+			fmt.Println("Nama kategori BELUM terdata")
 		}
 		found = false
 	}else if metode == "Binary" {
